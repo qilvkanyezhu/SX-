@@ -1,0 +1,6 @@
+<h2>购物车添加</h2>
+<form method="post" action="/cart/add">
+  商品编号:<input type="text" name="lid"><br>
+  密码:<input type="text" name="buyCount"><br>
+  <input type="submit">
+</form>

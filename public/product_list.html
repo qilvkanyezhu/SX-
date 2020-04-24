@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+  </head>
+  <body>
+    <h2>商品列表</h2>
+    <div>
+      页码<input type="text" id="pno" /><br />
+      大小<input type="text" id="pageSize" /><br />
+      <button id="buttonID1" onclick="DisplayProductList()">显示</button>
+    </div>
+    <div>
+      <ul id="productList"></ul>
+    </div>
+    <script>
+        function DisplayProductList(){
+          let pno = $("#pno").val();
+          let pageSize = $("#pageSize").val();   
+          $.get("/product/list", { pno, pageSize }, function (result) {
+            let listhtml = "";
+            $(result.data).each(function (i, item) {
+              //遍历JSON数据得到所需形式
+              listhtml += `<li>
+                商品序号：${i}<br>
+                商品标题：${item.title}<br>
+                商品单价：${item.price}<br>
+                商品图片：<br><img src='${item.pic}'>
+             </li>`;
+            });
+            $("#productList").html(listhtml);
+          });
+        }    
+    </script>
+  </body>
+</html>
